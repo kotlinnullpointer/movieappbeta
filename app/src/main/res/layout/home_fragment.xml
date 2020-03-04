@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="loading"
+            type="Boolean" />
+        <variable
+            name="error"
+            type="Boolean" />
+        <variable
+            name="cached"
+            type="Boolean" />
+        <variable
+            name="success"
+            type="Boolean" />
+        <variable
+            name="viewmodel"
+            type="com.nagarro.poptvworkshop.ui.main.viewmodel.HomeViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/home_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            tools:visibility="visible"
+            android:visibility="@{(cached||success)? View.VISIBLE: View.GONE}">
+
+            <LinearLayout
+                android:id="@+id/main_home"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" />
+
+        </androidx.core.widget.NestedScrollView>
+
+
+        <LinearLayout
+            android:id="@+id/view_status_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            tools:visibility="visible"
+            android:visibility="@{error? View.VISIBLE: View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/anim_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:scaleType="center"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/network_error"
+                app:lottie_repeatCount="3" />
+
+            <TextView
+                android:id="@+id/text_error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:gravity="center_horizontal"
+                android:text="@string/error_api_msg"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_retry"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp"
+                android:onClick="@{() -> viewmodel.loadAll()}"
+                android:gravity="center"
+                android:text="@string/tap_to_retry"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/view_status_loading"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            tools:visibility="gone"
+            android:visibility="@{loading? View.VISIBLE: View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/anim_loading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:scaleType="centerCrop"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+
+                app:lottie_rawRes="@raw/downloading" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/anim_loading"
+                android:layout_marginTop="24dp"
+                android:gravity="center_horizontal"
+                android:text="Loading.."
+                android:textSize="24sp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

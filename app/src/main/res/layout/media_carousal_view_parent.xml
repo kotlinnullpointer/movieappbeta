@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.nagarro.poptvworkshop.domain.CarousalMediaItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/carousal_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/size_24"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/carousal_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:padding="@dimen/size_8"
+            android:text="@{data.title}"
+            android:textSize="@dimen/text_16"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="This is Carosual Title" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/carousal_list"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/carousal_header"
+            app:setItems="@{data.mediaItem}"
+            tools:itemCount="20"
+            tools:listitem="@layout/row_carousal_round" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

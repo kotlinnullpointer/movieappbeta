@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primaryColor">#ffffff</color><!--Main Highlights-->
+    <color name="primaryLightColor">#2c2c2c</color>
+    <color name="primaryDarkColor">#000000</color><!--NOtification bar-->
+    <color name="secondaryColor">#ffffff</color><!--Accents-->
+    <color name="secondaryLightColor">#d774ff</color>
+    <color name="secondaryDarkColor">#6b00c0</color>
+    <color name="primaryTextColor">#ffffff</color>
+    <color name="secondaryTextColor">#ffffff</color>
+
+    <color name="col_1">#af4448</color>
+    <color name="col_2">#cabf45</color>
+</resources>

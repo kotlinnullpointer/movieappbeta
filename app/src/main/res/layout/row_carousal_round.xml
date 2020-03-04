@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.nagarro.poptvworkshop.domain.CastItem" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/carousal_round_title"
+            android:layout_width="@dimen/size_100"
+            android:layout_height="@dimen/size_100"
+            app:civ_border_color="@color/primaryColor"
+            app:civ_border_width="2dp"
+            app:isPortrait="@{true}"
+            app:loadImageFrom="@{item.profileImage}"
+            app:widthDp="@{200}"
+            tools:src="@drawable/ic_home_24" />
+
+        <TextView
+            android:id="@+id/carousal_round_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="@{item.name}"
+            tools:text="Item dfj\nsjdfnsfd sdjfnsfd" />
+    </LinearLayout>
+</layout>

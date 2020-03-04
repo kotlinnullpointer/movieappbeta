@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="mediaItem"
+            type="com.nagarro.poptvworkshop.domain.MediaItem" />
+
+        <variable
+            name="isInWatchlist"
+            type="Boolean" />
+
+        <variable
+            name="isInDownloads"
+            type="Boolean" />
+
+        <variable
+            name="isApiError"
+            type="Boolean" />
+
+        <variable
+            name="viewModel"
+            type="com.nagarro.poptvworkshop.ui.main.viewmodel.ShowDetailsViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/detail_header_parent"
+                android:layout_width="match_parent"
+                android:layout_height="600dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imv_detail_image"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:contentDescription="@{mediaItem.title}"
+                    android:scaleType="centerCrop"
+                    app:isPortrait="@{true}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:loadImageFrom="@{mediaItem.posterImage}"
+                    app:widthDp="@{780}" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/gradient_vertical"
+                    android:importantForAccessibility="no"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_meta_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/size_8"
+                    app:layout_constraintBottom_toTopOf="@id/btn_watchlist"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:setMetaInfo="@{mediaItem}"
+                    android:visibility="gone"
+                    tools:text="1h44m \u2022 2016 \u2022 Comedy &amp; Romance" />
+
+                <!--                Watchlist Button-->
+                <LinearLayout
+                    android:id="@+id/btn_watchlist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_play"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:targetApi="q">
+
+                    <ImageView
+                        android:layout_width="@dimen/size_48"
+                        android:layout_height="@dimen/size_48"
+                        android:contentDescription="@string/btn_label_watchlist"
+                        android:onClick="@{() -> viewModel.updateWatchList()}"
+                        android:padding="@dimen/size_8"
+                        android:src="@{isInWatchlist? @drawable/ic_check_24:@drawable/ic_add_24}"
+                        android:tint="@color/primaryTextColor"
+                        tools:src="@drawable/ic_add_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_watchlist"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/text_12" />
+                </LinearLayout>
+
+
+                <!--                Play Button-->
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_play"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_play_simple"
+                    android:drawablePadding="@dimen/size_4"
+                    android:paddingHorizontal="@dimen/size_24"
+                    android:paddingVertical="@dimen/size_12"
+                    android:paddingStart="@dimen/size_24"
+                    android:paddingTop="@dimen/size_12"
+                    android:paddingEnd="@dimen/size_24"
+                    android:paddingBottom="@dimen/size_12"
+                    android:text="@string/btn_label_play"
+                    app:layout_constraintBottom_toBottomOf="@id/btn_watchlist"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_download"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/btn_watchlist"
+                    app:layout_constraintTop_toTopOf="@id/btn_watchlist"
+                    tools:targetApi="o" />
+
+                <!--                Download Button-->
+                <LinearLayout
+                    android:id="@+id/btn_download"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/btn_play">
+
+                    <ImageView
+                        android:layout_width="@dimen/size_48"
+                        android:layout_height="@dimen/size_48"
+                        android:contentDescription="@string/label_download"
+                        android:onClick="@{() -> viewModel.addToDownloads()}"
+                        android:padding="@dimen/size_8"
+                        android:src="@{isInDownloads? @drawable/ic_down_line:@drawable/ic_down_circle}"
+                        android:tint="@color/primaryTextColor"
+                        tools:src="@drawable/ic_down_circle" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_download"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/text_12" />
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <LinearLayout
+                android:id="@+id/detail_bottom_parent"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:visibility="@{isApiError?View.GONE:View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detail_header_parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

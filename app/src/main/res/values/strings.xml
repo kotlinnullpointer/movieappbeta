@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">POP TV WORKSHOP</string>
+
+    <!--    Nav Bar-->
+    <string name="label_nav_home">Home</string>
+    <string name="label_nav_downloads">Downloads</string>
+    <string name="label_nav_search">Search</string>
+    <string name="label_nav_network">Hotspots</string>
+    <string name="label_nav_more">More</string>
+
+
+    <!--    Pref keys-->
+    <string name="theme_pref_key">theme_pref</string>
+
+<!--    labels and messages-->
+    <string name="label_watchlist">Watchlist</string>
+    <string name="label_watchlist_added">In Watchlist</string>
+    <string name="label_download">Download</string>
+    <string name="label_download_done">In Downloads</string>
+    <string name="car_label_scifi">Sci-Fi</string>
+    <string name="car_label_latest">Latest Movies</string>
+    <string name="car_label_animated">Animated</string>
+    <string name="car_label_actor">Actor</string>
+    <string name="car_label_cast">Movie Cast</string>
+    <string name="car_label_romance">Romance</string>
+    <string name="car_label_suggestion">You May Like</string>
+    <string name="label_coming_soon">%1$s\nis Coming Soon</string>
+    <string name="label_detail">%1$s \u2022 %2$s \u2022 %3$s</string>
+    <string name="btn_label_watchlist">Add to watchlist</string>
+    <string name="btn_label_play">Play</string>
+    <string name="error_api_msg">Some error occurred while loading data</string>
+    <string name="error_details_api_msg">Some error occurred while loading Movie details!</string>
+    <string name="error_cast_api_msg">Some error occurred while loading Movie cast!</string>
+    <string name="tap_to_retry">Tap to retry</string>
+    <string name="oops_something_went_wrong_try_again">Oops Something went Wrong. Try Again?</string>
+    <string name="message_stored_cache">Loading from Offline Cache</string>
+
+
+</resources>
